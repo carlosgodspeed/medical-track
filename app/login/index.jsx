@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Colors from '../../constant/Colors'
 
 export default function LoginScreen() {
@@ -19,7 +19,24 @@ export default function LoginScreen() {
             backgroundColor:Colors.PRIMARY,
             height:'100%'
         }}>
-            <Text>Mantenha sua Saúde em Dia</Text>
+            <Text style={{
+                fontSize:30,
+                fontWeight:'bold',
+                color:'white',
+                textAlign:'center'
+            }}>Mantenha sua Saúde em Dia</Text>
+
+            <Text style={{
+                color:'white',
+                textAlign:'center',
+                fontSize:17,
+                marginTop:20
+            }}>Busque seus Medicamentos</Text>
+
+
+            <TouchableOpacity>
+                <Text>Continue</Text>
+            </TouchableOpacity>
         </View>
     </View>
    )
