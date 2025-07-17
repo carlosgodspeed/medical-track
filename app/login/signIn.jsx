@@ -1,10 +1,38 @@
 import { useRouter } from 'expo-router';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { auth } from '../../config/FirebaseConfig';
 import Colors from '../../constant/Colors';
 
 export default function SignIn(){
 
     const router = useRouter();
+    const [email,setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const OnSignInClick = () => {
+
+        if(!email||!password)
+        {
+            Alert.alert('Por favor Dgite o Email e Senha');
+            return;
+        }
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user);
+            router.replace('(tabs)')
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            if(errorCode === 'Autenticação/Credencial Invalida')
+            {
+                Alert.alert('Email ou Senha Invalidos')
+            }
+        });
+    }
 
     return (
         <View style={{
@@ -16,20 +44,26 @@ export default function SignIn(){
             <View style={{
                 marginTop:25,
             }}>
+                <Text>Email</Text>
                 <TextInput placeholder='Email'
                 style={styles.textInput}
+                onChangeText={(value)=>setEmail(value)}
                 />
             </View>
             <View style={{
                 marginTop:25,
             }}>
+                <Text>Senha</Text>
                 <TextInput placeholder='Password'
                 secureTextEntry={true}
                 style={styles.textInput} 
+                onChangeText={(value)=>setPassword(value)}
                 />
             </View>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button}
+            onPress={OnSignInClick}
+            >
                 <Text  style={{
                     fontSize:17,
                     color:'white',

@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import Colors from '../../constant/Colors';
 import { auth } from './../../config/FirebaseConfig';
 
@@ -16,13 +16,16 @@ export default function SignUp(){
 
         if(!email||!password)
         {
-            ToastAndroid.show('please fill all details',ToastAndroid.BOTTOM)
+            ToastAndroid.show('Preencha todo o Formulario',ToastAndroid.BOTTOM);
+            Alert.alert('Entre com o Email e Senha');
+            return;
         }
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential)=> {
                 const user = userCredential.user;
                 console.log(user);
+                router.push('(tabs)')
 
             })
             .catch((error)=> {
@@ -30,7 +33,8 @@ export default function SignUp(){
                 console.log(errorCode);
                 if(errorCode === 'auth/email-already-in-use')
                 {
-                    ToastAndroid.show('Email já está em uso',ToastAndroid.BOTTOM);
+                    ToastAndroid.show('este Email já está em uso',ToastAndroid.BOTTOM);
+                    Alert.alert('este Email já está cadastrado')
                 }
             });
     }
