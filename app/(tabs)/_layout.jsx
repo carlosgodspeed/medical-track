@@ -1,10 +1,24 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../config/FirebaseConfig';
 
 export default function TabLayout() {
-  return (
+
+    const router = useRouter();
+
+    onAuthStateChanged(auth, (user) =>{
+        if(user) {
+            const uid = user.uid;
+            console.log(uid);
+        } else {
+            router?.push('/login')
+        }
+    })
+
+return (
     <Tabs screenOptions={{
-        headerShown:false   
+        headerShown:false 
     }}>
         <Tabs.Screen name='index'
             options={{
@@ -31,5 +45,5 @@ export default function TabLayout() {
             }}
         />
     </Tabs>
-  )
+    )
 }

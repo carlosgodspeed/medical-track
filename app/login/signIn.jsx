@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { auth } from '../../config/FirebaseConfig';
 import Colors from '../../constant/Colors';
 
@@ -36,8 +36,13 @@ export default function SignIn(){
 
     return (
         <View style={{
-            padding:25
+            padding:25,
+            marginTop:50,
+            backgroundColor:'white',
         }}>
+            <Image source={require('./../../assets/images/consult.png')}
+            style={styles.image}
+            />
             <Text style={styles.textHeader}>Bem Vindo de Volta</Text>
             <Text style={styles.subText}>Realize seu Login</Text>
 
@@ -117,5 +122,10 @@ const styles = StyleSheet.create({
         marginTop:20,
         borderWidth:1,
         borderColor:Colors.PRIMARY,
-    }
+    },
+    image:{
+        width:340,
+        height:250,
+        borderRadius:2
+    },
 })

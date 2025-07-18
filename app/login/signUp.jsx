@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
-import { Alert, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import Colors from '../../constant/Colors';
 import { auth } from './../../config/FirebaseConfig';
 
@@ -17,7 +17,7 @@ export default function SignUp(){
         if(!email||!password)
         {
             ToastAndroid.show('Preencha todo o Formulario',ToastAndroid.BOTTOM);
-            Alert.alert('Entre com o Email e Senha');
+            Alert.alert('Preencha todos os campos');
             return;
         }
 
@@ -41,21 +41,28 @@ export default function SignUp(){
 
     return (
         <View style={{
-                    padding:25
+                    padding:25,
+                    marginTop:20,
+                    backgroundColor:'white',
                 }}>
+                    <Image source={require('./../../assets/images/medical-icon.png')}
+                    style={styles.image}
+                    />
                     <Text style={styles.textHeader}>Crie uma Nova Conta</Text>
         
                     <View style={{
                         marginTop:25,
                     }}>
-                        <TextInput placeholder='Nome Completo'
+                        <Text>Nome Completo</Text>
+                        <TextInput placeholder=''
                         style={styles.textInput}
                         />
                     </View>
                     <View style={{
                         marginTop:25,
                     }}>
-                        <TextInput placeholder='Email'
+                        <Text>Email</Text>
+                        <TextInput placeholder=''
                         style={styles.textInput}
                         onChangeText={(value)=>setEmail(value)}
                         />
@@ -63,7 +70,8 @@ export default function SignUp(){
                     <View style={{
                         marginTop:25,
                     }}>
-                        <TextInput placeholder='Password'
+                        <Text>Senha</Text>
+                        <TextInput placeholder=''
                         secureTextEntry={true}
                         style={styles.textInput}
                         onChangeText={(value)=>setPassword(value)} 
@@ -126,5 +134,10 @@ const styles = StyleSheet.create({
         marginTop:20,
         borderWidth:1,
         borderColor:Colors.PRIMARY,
-    }
+    },
+    image:{
+        width:340,
+        height:250,
+        borderRadius:2
+    },
 })
