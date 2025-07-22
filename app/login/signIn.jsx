@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { auth } from '../../config/FirebaseConfig';
+import { setLocalStorage } from '../../service/Storage';
 import Colors from '../../constant/Colors';
 
 export default function SignIn(){
@@ -19,9 +20,10 @@ export default function SignIn(){
             return;
         }
         signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async(userCredential) => {
             const user = userCredential.user;
             console.log(user);
+            await setLocalStorage('userDetail',user);
             router.replace('(tabs)')
         })
         .catch((error) => {

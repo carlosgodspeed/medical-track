@@ -1,32 +1,33 @@
 import { useRouter } from 'expo-router';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useState } from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import Colors from '../../constant/Colors';
 import { auth } from './../../config/FirebaseConfig';
+import { setLocalStorage } from '../../service/Storage';
 
 export default function SignUp(){
 
     const router = useRouter();
-
     const [email, setEmail] = useState();
     const [password,setPassword] = useState();
-
+    const [userName,setUserName] = useState();
     const OnCreateAccount=()=>{
 
-        if(!email||!password)
+        if(!email||!password||!userName)
         {
             ToastAndroid.show('Preencha todo o Formulario',ToastAndroid.BOTTOM);
             Alert.alert('Preencha todos os campos');
             return;
         }
-
         createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential)=> {
+            .then(async(userCredential)=> {
                 const user = userCredential.user;
-                console.log(user);
+                await updateProfile(user,{
+                    displayName:userName
+                });
+                await setLocalStorage('userDetail',user);
                 router.push('(tabs)')
-
             })
             .catch((error)=> {
                 const errorCode = error.code;
@@ -55,6 +56,7 @@ export default function SignUp(){
                     }}>
                         <Text>Nome Completo</Text>
                         <TextInput placeholder=''
+                        onChangeText={(value)=>setUserName(value)}
                         style={styles.textInput}
                         />
                     </View>
