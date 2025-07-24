@@ -5,7 +5,7 @@ import { getLocalStorage } from '../../service/Storage';
 
 export default function TabLayout() {
 
-    const router = useRouter(); //1:13:21
+    const router = useRouter();
 
     useEffect(()=>{
         GetUserDetail();
