@@ -38,7 +38,7 @@ export default function Header() {
                 }}>
                     <Image
                         source={require('../assets/images/smiley.png')}
-                        style={{ width: 45, height: 45 }}
+                        style={{ width: 55, height: 55 }}
                     />
                     <Text style={{
                         fontSize: 30,

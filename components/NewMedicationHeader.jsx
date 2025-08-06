@@ -1,9 +1,9 @@
-import Ionicons from '@expo/vector-icons/Ionicons'
-import { useRouter } from 'expo-router'
-import { Image, TouchableOpacity, View } from 'react-native'
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
+import { Image, TouchableOpacity, View } from 'react-native';
 export default function NewMedicationHeader() {
 
-    const router = useRouter();
+    const router = useRouter(); // 1:35:12
 
 return (
     <View>

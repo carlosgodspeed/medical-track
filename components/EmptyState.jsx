@@ -1,7 +1,7 @@
+import { useRouter } from 'expo-router';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../constant/Colors';
 import ConstantString from '../constant/ConstantString';
-import { useRouter } from 'expo-router';
 
 export default function EmptyState() {
 
@@ -15,8 +15,8 @@ export default function EmptyState() {
         }}>
             <Image source={require('./../assets/images/medicine.png')}
             style={{
-                width:120,
-                height:120,
+                width:220,
+                height:220,
             }}
             />
             <Text style={{
@@ -32,8 +32,8 @@ export default function EmptyState() {
             }}>{ConstantString.MedicationSubText}</Text>
 
             <TouchableOpacity style={{
-                backgroundColor:Colors.PRIMARY,
-                padding:15,
+                backgroundColor:'#1aff00',
+                padding:12,
                 borderRadius:10,
                 width:'100%',
                 marginTop:30,
@@ -42,7 +42,7 @@ export default function EmptyState() {
                         fontFamily:'bold',
                         fontSize:17,
                         textAlign:'center',
-                        color:'white',
+                        color:'black',
                     }}>{ConstantString.AddNewMedication}</Text>
             </TouchableOpacity>
         </View>
