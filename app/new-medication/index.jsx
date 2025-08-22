@@ -7,6 +7,7 @@ return (
     <View>
         <View>
             <NewMedicationHeader />
+            
             <AddMedicationForm/>
         </View>
     </View>
